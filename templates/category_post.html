@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+
+
+
+<h3 class="text-uppercase text-warning mt-5" style="letter-spacing: 2px;">Category - {{ category.category_name }}</h3>
+<div class="row mb-2">
+  {% for post in blog_post %}
+
+  <div class="col-md-6">
+    <div class="card border-0">
+      <div class="card-body">
+        <h3><a href="{% url 'single_page' post.slug %}" class="text-dark">{{post.tittle}}</a></h3>
+        <small class="mb-1 text-muted">{{ post.created_at | timesince}} ago | {{post.author}}</small>
+        <p class="card-text">{{ post.short_description | truncatewords:25 }}</p>
+      </div>
+    </div>
+  </div>
+
+{% endfor %}
+
+{% endblock %}
