@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
 from .models import Blogs,Category
+from django.db.models import Q
 
 # Create your views here.
 

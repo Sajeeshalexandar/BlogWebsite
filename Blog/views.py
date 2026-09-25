@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render,redirect
 from blog_app.models import Category,Blogs
-
+from django.db.models import Q
 
 def home(request):
  
@@ -15,3 +15,11 @@ def home(request):
     }
     return render(request,'home.html',context)
 
+def searchBlog(request):
+    keyword = request.GET.get('keyword')
+    blogs = Blogs.objects.filter(Q(tittle__icontains = keyword) | Q(short_description__icontains = keyword) | Q(blog_body__icontains = keyword),status = 'Published')
+    context = {
+        'blogs':blogs,
+        'keyword':keyword
+    }
+    return render(request,'search.html',context)
